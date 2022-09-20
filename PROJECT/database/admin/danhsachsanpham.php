@@ -1,5 +1,8 @@
 <?php
+ session_start();
+ // session_destroy();
 include 'connect.php';
+
 $prodcut = mysqli_query($conn, "SELECT product.*, type.nametype as kieu_Dang, category.namecategory as danh_muc FROM product  INNER JOIN type on type.typeid = product.typeid INNER JOIN category on category.categoryid = product.categoryid");
 //$category =     mysqli_query($conn,"SELECT * from product");
 //B1: tinh tong so ban ghi cua danhsachsanpham
@@ -8,7 +11,7 @@ $prodcut = mysqli_query($conn, "SELECT product.*, type.nametype as kieu_Dang, ca
  
 // var_dump($total);
 //B2: thiet lap so ban ghi tren 1 trang
- $limit = 3;
+ $limit = 12;
 //B3:tinh so trang
 $page = ceil($total/$limit);
 //var_dump($page);
@@ -27,9 +30,12 @@ if (!isset ($_GET['page']) ) {
 //B5:TINH START
  $start = ($cr_page -1)*$limit;
 //6. Query
-$result = mysqli_query($conn,"SELECT product.*,  type.nametype as kieu_Dang, category.namecategory as danh_muc FROM product INNER JOIN type on type.typeid = product.typeid INNER JOIN category on category.categoryid = product.categoryid LIMIT $start,$limit");
-
- 
+$result = mysqli_query($conn,"SELECT product.*, type.nametype as kieu_Dang, category.namecategory as danh_muc FROM product INNER JOIN type on type.typeid = product.typeid INNER JOIN category on category.categoryid = product.categoryid INNER JOIN brand on brand.brandid = product.brandid LIMIT $start,$limit");
+$brand = mysqli_query($conn,"SELECT * from brand");
+// foreach($brand as $key => $value){
+//     echo "<pre>";
+//     var_dump($value['namebrand']);
+// }
 // echo '<pre>';
 // var_dump($data);
 ?>
@@ -54,10 +60,15 @@ $result = mysqli_query($conn,"SELECT product.*,  type.nametype as kieu_Dang, cat
                 <div class="d-flex justify-content-end mb-2">
                     <a href="add-product.php" class="btn btn-primary">Add new</a>
                 </div>
+                <div class="d-flex justify-content-end mb-2">
+                    <a href="quanlydonhang.php" class="btn btn-primary">Quan ly don hang</a>
+                </div>
+                <a href="logout.php" class="btn btn-primary">LOG OUT</a>
+
                 <table class="table table-responsive table-bordered">
                     <thead>
                         <th>STT</th>
-                        <th>product-id</th>
+                      
                         <th>Tên sản phẩm</th>
                         <th>Gía</th>
                         <th>Thương hiệu</th>
@@ -65,37 +76,48 @@ $result = mysqli_query($conn,"SELECT product.*,  type.nametype as kieu_Dang, cat
                         <th>Danh mục</th>
                         <th>Hình ảnh</th>
                         <th>Mô tả</th>
-                        <th>Cập nhật</th>
+                        <th style="width: 190px">Cập nhật</th>
                     </thead>
                     <tbody>
                         <?php 
-                        while($row = mysqli_fetch_assoc($result)){
+                       
+                            // echo "<pre>";
+                            //         var_dump($row);
                                 foreach($result as $key => $value){
+                                    // echo "<pre>";
+                                    // var_dump($value);
+                                
                                     ?>
                                     
                                     <tr>
                                         <td><?php echo $key +1 ?></td>
-                                        <td><?php echo $value['productid']; ?></td>
                                         <td><?php echo $value['name']; ?></td>
                                         <td><?php echo $value['price']; ?></td>
-                                        <td><?php echo $value['brand']; ?></td>
+
+                                      <?php  foreach($brand as $key => $valuee){ 
+                                        if($value['brandid'] == $valuee['brandid']){?>
+                                        <td><?php echo $valuee['namebrand']; ?></td>
+                                            <?php  
+                                        }
+                                         }
+                                         ?>
+                                        
                                         <td><?php echo $value['kieu_Dang']; ?></td>
                                         <td><?php echo $value['danh_muc']; ?></td>
                                         <td><img src="uploads/<?php echo $value['image'] ?>" alt="" width="50"></td>
                                         <td><?php echo $value['ProductDescription']; ?></td>
                                         <td>
                                             <a class="btn btn-warning" href="updatesp.php?id=<?php echo $value['productid'] ?>">Cap nhat</a>
-                                           <button><a href="deletesp.php?id=<?php echo $value['productid'] ?>" class="btn btn-danger btn-delete">Xoa</a></button> 
+                                           <button style="border: none; outline: none;"><a href="deletesp.php?id=<?php echo $value['productid'] ?>" class="btn btn-danger btn-delete">Xoa</a></button> 
                                         </td>
                                     </tr>
                                     <?php
                                 }
-                                ?>
-                            <?php } ?>
-                            
+                                ?>                    
                     </tbody>
                     
                 </table>
+                
                 <ul class="pagination ">
                 <?php if($cr_page -1 > 0){  ?>
   <li class="page-item"><a class="page-link" href="danhsachsanpham.php?page=<?php echo $cr_page -1 ?>">Previous</a></li>

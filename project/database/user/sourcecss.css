@@ -1,0 +1,34 @@
+/* hover gach duoi */
+a,a:visited,a:hover,a:active{
+    -webkit-backface-visibility:hidden;
+            backface-visibility:hidden;
+    position:relative;
+    transition:0.5s color ease;
+    text-decoration:none;
+  }
+  a.linkheader:after{
+    content: "";
+    transition:0.5s all ease;
+    -webkit-backface-visibility:hidden;
+            backface-visibility:hidden;
+    position:absolute;
+  }
+
+  a.linkheader:after{
+    bottom: -0.01rem;
+  }
+a.linkheader:after{
+    height:5px;
+    height:0.15rem;
+    width:0;
+    background:white;
+  }
+  
+   a.linkheader:after{
+    left:50%;
+    -webkit-transform:translateX(-50%);
+            transform:translateX(-50%);
+  }
+  a.linkheader:hover:after{
+    width:60%;
+  }

@@ -1,0 +1,122 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html{
+  font-size: 100%;
+}
+/* header menu logo */
+#header1{
+    background-color: #53284f;
+    height: 80px;
+}
+.nav{
+    max-width: 1650px;
+    margin: 0px auto;
+}
+nav{
+    display: flex;
+}
+#main-menu{
+    display: flex;
+    list-style: none;
+    margin-left: 2.5rem;
+
+}
+.nav #logo img{
+    /* logo */
+    max-width: 200px;
+    height: auto;
+}
+#logo{
+    padding: 5px 0px;
+    margin-top: 0.6rem;
+}
+#main-menu li {
+    position: relative;
+}
+#main-menu li a{
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 25px 25px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    height: 3.5rem;
+} 
+/* sub menu */
+#main-menu ul.sub-menu{
+    position: absolute;
+    background-color: #ebeaea;
+    padding: 15px 0px;
+    list-style: none;
+    width: 12rem;
+    border-radius: 5px;
+    opacity: 80%;
+    left: 1.45rem;
+    display: none;
+    margin-top: 1rem;
+    z-index: 2;
+}
+#main-menu ul.sub-menu a{
+    padding: 10px 30px;
+}
+#main-menu li:hover ul.sub-menu{
+    display: block;
+  
+}
+
+  /* ANH HEADER */
+  .img{
+    height: 35rem;
+    position: relative;
+  }
+  .img img{
+    position: absolute;
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+    width: 100%;
+  }
+  .text a{
+
+    text-decoration: none;
+    color: white;
+    font-family: 'Open Sans';
+    -webkit-transition: color 0.3s ease 0s, background-color 0.3s ease 0s, border-color 0.3s ease 0s;
+    left: 48%;
+    top: 53%;
+    font-size: 30px;
+    
+  }
+  .text a:hover{
+    color: #53284f;
+  }
+
+  .buy{
+    text-decoration: none;
+    color: white;
+    background: #53284f;
+    border-radius: 3px;
+    border: 1px black solid;
+    padding: 5px 20px;
+    transition: 0.5s all ;
+ 
+  }  
+  .buy:hover{
+ opacity: 0.5;
+ color: white;
+ transition: 0.5s all ;
+  }
+  .card-img{
+    height: 300px;
+    position: relative;
+  }
+  .card-img-top{
+    position: absolute;
+    height: 100%;
+  }
+  h5.card-title{
+    margin-bottom: 20px;
+  }

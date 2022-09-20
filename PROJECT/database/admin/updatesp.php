@@ -8,6 +8,7 @@ $img_pro = mysqli_query($conn,"SELECT * FROM image where productid = $id");
  $sql_up = "SELECT * from product where productid = $id";
  $result = $conn->query($sql_up);
  $pro = mysqli_fetch_assoc($result);
+ var_dump($pro);
 
  if(isset($_POST['submit'])){
  $id = htmlspecialchars($_POST['id']);   
@@ -54,7 +55,7 @@ $img_pro = mysqli_query($conn,"SELECT * FROM image where productid = $id");
  //
 //  $id_pro = mysqli_insert_id($conn);
 
- $sql = "UPDATE product SET name = '$name' , price = '$price', brand = '$brand', typeid = '$typeid', categoryid = '$category', image = '$image', ProductDescription = '$ProductDescription' WHERE productid = $id";
+ $sql = "UPDATE product SET name = '$name' , price = '$price', brandid = '$brand', typeid = '$typeid', categoryid = '$category', image = '$image', ProductDescription = '$ProductDescription' WHERE productid = $id";
   $result = $conn->query($sql);
   
   if($result){
@@ -96,7 +97,12 @@ $img_pro = mysqli_query($conn,"SELECT * FROM image where productid = $id");
                     </div>
                     <div class="form-group">
                         <label>Thương hiệu</label>
-                        <input name="brand" type="text" class="form-control"  placeholder="Tên thương hiệu" value="<?php echo $pro['brand'] ?>">
+                        <select name="brand" id="">
+                        <option value="" class="disabled">___BRAND___</option>
+                         <?php foreach($brand as $key => $value){ ?>
+                         <option value="<?php echo $value['brandid'] ?>"<?php echo ($value['brandid'] == $pro['brandid'])? 'selected' : ''   ?>><?php echo $value['namebrand'] ?></option>
+                             <?php } ?>                   
+            </select>
                     </div>
                     <div class="form-group">
                         <label>Kiểu dáng</label>
