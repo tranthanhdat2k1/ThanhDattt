@@ -150,6 +150,7 @@ a.linkheader:hover:after{
  position: absolute;
  bottom: 0px;
  z-index: 1;
+ margin-top: 20px;
 }
 .img_des{
 height: 120px;
@@ -276,4 +277,15 @@ width: 100%;
 font-family: Open sans-serif;
 font-size: 9px;
 cursor: pointer;
+}
+#feedback{
+  padding: 20px 20px;
+    border: 1px solid red;
+    margin: 20px 20px;
+    box-shadow: 5px 5px;
+}
+.sua{
+  padding: 10px;
+    border: 1px solid;
+    margin: 20px
 }

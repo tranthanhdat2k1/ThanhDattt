@@ -52,6 +52,7 @@ if(isset($_POST['submit'])){
                 </nav>
             </div>
     </div>
+    
     <div class="content">
         <div class="box">
         <h1>Chi tiết đơn hàng</h1>

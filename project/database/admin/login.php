@@ -6,7 +6,10 @@ if(isset($_SESSION['userid'])){
     header('location:danhsachsanpham.php');
 }
 if(isset($_SESSION['user'])){
+  // $object= $_SESSION['user']['id'];
   $object = json_decode(json_encode($_SESSION['user']['id']), FALSE);
+  var_dump($object);
+ 
   header("location:../user/danhsachsanphamuser.php?userid=$object");
 }
     //require_once 'connect.php';
@@ -27,7 +30,7 @@ if(isset($_SESSION['user'])){
         // var_dump($pass);
        
         if(count($errors) == 0){
-            $sql = "SELECT * FROM user where username='$username' and password = '$password'";
+            $sql = "SELECT * FROM user where username='$username' and password =sha1($password)";
             $result = $conn->query($sql);
             //$row = mysqli_fetch_assoc($result);
             // var_dump($row['userid']);
@@ -56,6 +59,8 @@ if(isset($_SESSION['user'])){
             }
         }
     }
+    $i = sha1(12345678);
+    var_dump($i);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +91,7 @@ if(isset($_SESSION['user'])){
                   <input type="text" id="form1Example13" required name="username" placeholder="USERNAME"class="form-control form-control-lg" />
                 </div>
                 <div class="form-outline mb-4">
-                  <input type="password" id="form1Example23" required name="password" placeholder="Password" class="form-control form-control-lg" />
+                  <input type="text" id="form1Example23" required name="password" placeholder="Password" class="form-control form-control-lg" />
                 </div>
   
                 <div class="d-flex justify-content-around align-items-center mb-4">

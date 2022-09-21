@@ -1,11 +1,5 @@
-/* hover gach duoi */
-a,a:visited,a:hover,a:active{
-    -webkit-backface-visibility:hidden;
-            backface-visibility:hidden;
-    position:relative;
-    transition:0.5s color ease;
-    text-decoration:none;
-  }
+* hover gach duoi */
+
   a.linkheader:after{
     content: "";
     transition:0.5s all ease;
@@ -32,3 +26,13 @@ a.linkheader:after{
   a.linkheader:hover:after{
     width:60%;
   }
+  .card-title{
+    display: -webkit-box;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      max-height: 50px;
+      height: 50px;
+  }
+  

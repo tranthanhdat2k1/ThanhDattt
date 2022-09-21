@@ -1,11 +1,10 @@
 <?php
 session_start();
 include 'connect.php';
-var_dump($_GET['action']);
 
 $object = json_decode(json_encode($_SESSION['user']['id']), FALSE);
-var_dump($object);
  $userid = $object;
+ 
 if(isset($_GET['id'])){
     $id = $_GET['id'];
  }
@@ -14,6 +13,8 @@ $quantity = (isset($_GET['quantity']))? ($_GET['quantity']) : 1;
 if($quantity <= 0){
     $quantity = 1;
 }
+var_dump($quantity);
+
 // var_dump($action);
 // die();
 
@@ -22,6 +23,7 @@ if($quantity <= 0){
  $item = mysqli_fetch_assoc($product);
  //var_dump($item);
  $item =[
+    'userid' => $userid,
     'id' => $item['productid'],
     'name' => $item['name'],
     'image' => $item['image'],
@@ -32,7 +34,7 @@ if($quantity <= 0){
  if($action == 'add'){
     if(isset($_SESSION['cart'][$id])){
         $_SESSION['cart'][$id]['quantity'] += $quantity;
-        header("location:view-cart.php?userid=$userid");
+        header("location:danhsachsanphamuser.php?userid=$userid");
         die();
      }else{
         $_SESSION['cart'][$id] = $item;
@@ -42,6 +44,9 @@ if($quantity <= 0){
  }
 if($action == 'update'){
     $_SESSION['cart'][$id]['quantity'] = $quantity  ;
+    var_dump($quantity);
+    var_dump($_SESSION['cart'][$id]['quantity']);
+   
 }
 if($action == 'delete'){
     unset($_SESSION['cart'][$id]);
